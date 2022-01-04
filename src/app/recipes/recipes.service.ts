@@ -9,7 +9,7 @@ import { Recipe } from "./recipe.model";
 export class RecipeService {
   //recipeSelected = new Subject<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
-  private recipes: Recipe[] = [
+  /* private recipes: Recipe[] = [
     new Recipe(
       "Enchiladas verdes",
       "La enchilada es un plato que en México se elabora con tortilla de maíz enrollada y bañada en alguna salsa picante utilizando chile en su preparación.​",
@@ -22,9 +22,17 @@ export class RecipeService {
       "https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg",
       [new Ingredient("Apple", 3), new Ingredient("Sugar", 1)]
     ),
-  ];
+  ]; */
+
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
+
+  //mandar recipes a la bd
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
